@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DynamicDataDisplay">
+      <HintPath>ref\DynamicDataDisplay.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,6 +58,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="setting.xaml.cs">
+      <DependentUpon>setting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\BaseNotify.cs" />
+    <Compile Include="ViewModels\FlightBoardViewModel.cs" />
+    <Compile Include="ViewModels\Windows\SettingsWindowViewModel.cs" />
+    <Compile Include="Views\FlightBoard.xaml.cs">
+      <DependentUpon>FlightBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Joystick.xaml.cs">
+      <DependentUpon>Joystick.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,12 +78,31 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CommandsSender.cs" />
+    <Compile Include="InfoGetter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="setting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FlightBoard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Joystick.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="model.cs" />
+    <Compile Include="Model\ApplicationSettingsModel.cs" />
+    <Compile Include="Model\CommandHandler.cs" />
+    <Compile Include="Model\EventArgs\VirtualJoystickEventArgs.cs" />
+    <Compile Include="Model\Interface\ISettingsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +127,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Windows\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="routj.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
