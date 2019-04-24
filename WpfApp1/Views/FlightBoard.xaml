@@ -30,9 +30,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height ="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TextBlock Style="{StaticResource LabelStyle}" LayoutTransform="{StaticResource rotate}" VerticalAlignment="Center">Lon</TextBlock>
+        <TextBlock Grid.Row="1" Style="{StaticResource LabelStyle}" LayoutTransform="{StaticResource rotate}" VerticalAlignment="Center">Lon</TextBlock>
         <d3:ChartPlotter Grid.Row="1" Grid.Column="1" LegendVisible="False" Name="plotter">
         </d3:ChartPlotter>
         <Grid Grid.Row="0" Grid.Column="1">
@@ -46,6 +46,6 @@
             <Button Margin="5" Canvas.Left="130" Canvas.Top="10" Content="Connect" FontSize="15" Padding="4" Background="{StaticResource back}" Grid.Row="1" Grid.Column="1" Command="{Binding ConnectCommand}"/>
             <Button Margin="5" Canvas.Left="220" Canvas.Top="10" Content="Settings" FontSize="15" Padding="4" Background="{StaticResource back}" Grid.Row="1" Grid.Column="3" Command="{Binding SettingCommand}"/>
         </Grid>
-        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource LabelStyle}" HorizontalAlignment="Center">Lat</TextBlock>
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource LabelStyle}" HorizontalAlignment="Center">Lat</TextBlock>
     </Grid>
 </UserControl>

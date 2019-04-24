@@ -61,14 +61,22 @@
     <Compile Include="setting.xaml.cs">
       <DependentUpon>setting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AutoPilotViewModel.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />
     <Compile Include="ViewModels\FlightBoardViewModel.cs" />
+    <Compile Include="ViewModels\ManualViewModel.cs" />
     <Compile Include="ViewModels\Windows\SettingsWindowViewModel.cs" />
     <Compile Include="Views\FlightBoard.xaml.cs">
       <DependentUpon>FlightBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Joystick.xaml.cs">
       <DependentUpon>Joystick.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Manual.xaml.cs">
+      <DependentUpon>Manual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AutoPilot.xaml.cs">
+      <DependentUpon>AutoPilot.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +103,14 @@
     <Page Include="Views\Joystick.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Manual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AutoPilot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightSimulator.Views"
+        xmlns:local1="clr-namespace:WpfApp1.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -18,6 +19,14 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <local:FlightBoard x:Name="planeBoard" Canvas.Left="0" Canvas.Top="0"></local:FlightBoard>
+            <TabControl Grid.Column="1" Grid.Row="1">
+                <TabItem Header="Manual">
+                    <local1:Manual x:Name="Manual" Width="Auto" Height="Auto"/>
+                </TabItem>
+                <TabItem Header="Auto Pilot">
+                    <local1:AutoPilot x:Name="auto" Width="Auto" Height="Auto"/>
+                </TabItem>
+            </TabControl>
         </Grid>
     </Grid>
 </Window>

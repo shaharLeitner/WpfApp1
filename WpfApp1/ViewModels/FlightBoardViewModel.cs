@@ -1,11 +1,6 @@
 ﻿using FlightSimulator.Model;
-using FlightSimulator.Model.Interface;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfApp1;
 
@@ -18,6 +13,7 @@ namespace FlightSimulator.ViewModels
         public FlightBoardViewModel(SimulatorModel m)
         {
             model = m;
+            // set the settings window
             subSet = new Setting(this);
             model.PropertyChanged += (object Sender, PropertyChangedEventArgs e) =>
             {
@@ -58,23 +54,27 @@ namespace FlightSimulator.ViewModels
                 return _cancelCommand ?? (_cancelCommand = new CommandHandler(() => OnClickCancel()));
             }
         }
+        // end the current run of the model and restart it
         private void OnClickCon()
         {
-            Console.WriteLine("i am connecting");
+            model.End();
             model.ConnectCmd();
             model.Start();
         }
+        // show the setting window
         private void OnClickSet()
         {
             subSet.Show();
         }
 
+        // update the ip and port from the setting window
         private void OnClickOk ()
         {
             model.UpdateIpPort(Ip, Convert.ToInt32(InfoPort), Convert.ToInt32(CommandPort));
             subSet.Hide();
             DeleteVals();
         }
+        // when we click cancel delete the values and close the setting window
         private void OnClickCancel()
         {
             DeleteVals();
@@ -111,6 +111,7 @@ namespace FlightSimulator.ViewModels
             get; set;
         }
 
+        // delete the values we have kept
         private void DeleteVals()
         {
             Ip = null;

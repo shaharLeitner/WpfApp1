@@ -13,6 +13,7 @@ namespace WpfApp1
 {
     public class InfoGetter
     {
+        // the valued for the plane
         public double Lattitude { get; set; }
         public double Longttude { get; set; }
         private bool run;
@@ -25,10 +26,12 @@ namespace WpfApp1
         {
             try
             {
+                // make sure the values for the server run are correct
                 run = true;
                 this.settingsModel = settingsModel;
                 ep = new IPEndPoint(IPAddress.Parse(settingsModel.FlightServerIP), settingsModel.FlightInfoPort);
                 listner = new TcpListener(ep);
+                listner.Start();
             } catch (System.FormatException)
             {
                 ep = null;
@@ -36,26 +39,50 @@ namespace WpfApp1
                 run = false;
             }
         }
-        public void initServer()
+        public void InitServer()
         {
+            // start the run of the updating thread and server
             thread = new Thread(() =>
             {
                 try
                 {
-                    listner.Start();
-                    TcpClient client = listner.AcceptTcpClient();
-                    while(run)
+                    bool hasClient = false;
+                    TcpClient client;
+                    // we dont want the accept client to block us and ruin everything
+                    while (!hasClient && run) { // run untill we have a client or stoped
+                        hasClient = listner.Pending();
+                        Thread.Sleep(250);
+                    }
+                    if(!hasClient) // we were asked to stop
                     {
-                        using (NetworkStream stream = client.GetStream())
-                        using (StreamReader reader = new StreamReader(stream))
+                        return;
+                    }
+                    // get a client
+                    client = listner.AcceptTcpClient();
+                    using (NetworkStream stream = new NetworkStream(client.Client, false))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        while (run)
                         {
+                            // read a line from the server
                             string line = reader.ReadLine();
+                            if(line == null) // if there was an error reading try again
+                            {
+                                break;
+                            }
+                            // split the line.
                             string[] values = line.Split(',');
+                            // if we didn't get all 25 values there is an error in the simulator
+                            if (values.Length != 25)
+                            {
+                                continue;
+                            }
+                            // save the values
                             Lattitude = Convert.ToDouble(values[1]);
                             Longttude = Convert.ToDouble(values[0]);
-                            Console.WriteLine("Lattitude is: " + Lattitude + " Longttude is: " + Longttude);
                             Thread.Sleep(250);
                         }
+                        client.Close();
                     }
                 }
                 catch (SocketException)
@@ -65,10 +92,11 @@ namespace WpfApp1
             });
             thread.Start();
         }
-        
-        public void stop()
+        // stop the running of the server
+        public void Stop()
         {
             run = false;
+            listner.Stop();
         }
     }
 }

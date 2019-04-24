@@ -32,7 +32,8 @@ namespace FlightSimulator.Views
         {
             SimulatorModel simulator = SimulatorModel.Instance;
             vm = new FlightBoardViewModel(simulator);
-;           InitializeComponent();
+            vm.PropertyChanged += this.Vm_PropertyChanged;
+            InitializeComponent();
             this.DataContext = vm;
         }
 
@@ -48,7 +49,9 @@ namespace FlightSimulator.Views
         {
             if(e.PropertyName.Equals("Lat") || e.PropertyName.Equals("Lon"))
             {
-                    Point p1 = new Point(vm.Lon, vm.Lat);            // Fill here!
+                    Point p1 = new Point();
+                p1.X = vm.Lat;
+                p1.Y = vm.Lon;// Fill here!
                     planeLocations.AppendAsync(Dispatcher, p1);
             }
         }

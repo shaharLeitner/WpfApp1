@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="WpfApp1.Views.Manual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp1.Views"
+             xmlns:local1="clr-namespace:FlightSimulator.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="850">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="ailerion" Grid.Column="2" Text="&#x2190;Aileron&#x2192;" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name="zero" Grid.Column="1" Text="0" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Grid Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <RotateTransform x:Key="rotate" Angle="90"/>
+                </Grid.Resources>
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="zeror" Text="0.0" LayoutTransform="{StaticResource rotate}" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" x:Name="zerol" Text="0.0" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="top"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <RotateTransform x:Key="rotate" Angle="90"/>
+            </Grid.Resources>
+            <local1:Joystick x:Name="joyStick" Grid.Column="2" Width="Auto" Height="Auto"/>
+            <Slider x:Name="throttle" IsDirectionReversed="True" TickFrequency="0.05" TickPlacement="Both" Minimum ="0" Maximum="1" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Value="{Binding Throttle, Mode=TwoWay}"></Slider>
+            <TextBlock x:Name="Tthrottle" Grid.Column="0" Text="&#x2190;Throttle&#x2192;" LayoutTransform="{StaticResource rotate}" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name="elevator" Grid.Column="5" Text="&#x2190;Elevator&#x2192;" LayoutTransform="{StaticResource rotate}" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="rudder" Grid.Row="1" Grid.Column="2" Text="&#x2190;Rudder&#x2192;" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Slider x:Name="rudderS" IsDirectionReversed="True" TickFrequency="0.05" TickPlacement="Both" Minimum ="-1" Maximum="1" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Value="{Binding Rudder, Mode=TwoWay}" ></Slider>
+            <TextBlock x:Name="zeroB" Text="-1" Grid.Column="3" Grid.Row="0" FontSize="25" VerticalAlignment="Bottom"/>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -14,6 +14,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.ViewModels;
 
 namespace FlightSimulator.Views
 {
@@ -108,15 +109,15 @@ namespace FlightSimulator.Views
         private double _prevAileron, _prevElevator;
         private double canvasWidth, canvasHeight;
         private readonly Storyboard centerKnob;
-
+        private ManualViewModel vm;
         public Joystick()
         {
             InitializeComponent();
-
+            vm = ManualViewModel.Instance;
             Knob.MouseLeftButtonDown += Knob_MouseLeftButtonDown;
             Knob.MouseLeftButtonUp += Knob_MouseLeftButtonUp;
             Knob.MouseMove += Knob_MouseMove;
-
+            Moved += vm.WhenMoved;
             centerKnob = Knob.Resources["CenterKnob"] as Storyboard;
         }
 
@@ -156,7 +157,7 @@ namespace FlightSimulator.Views
                 (!(Math.Abs(_prevAileron - Aileron) > AileronStep) && !(Math.Abs(_prevElevator - Elevator) > ElevatorStep)))
                 return;
 
-            Moved?.Invoke(this, new VirtualJoystickEventArgs { Aileron = Aileron, Elevator = Elevator });
+            Moved?.Invoke(this, new VirtualJoystickEventArgs { Aileron = Aileron / 150, Elevator = Elevator / 400});
             _prevAileron = Aileron;
             _prevElevator = Elevator;
 
